@@ -1,2 +1,2 @@
 # personalBlog
-A standard personal blog for indivi
+A standard personal blog for individuals
