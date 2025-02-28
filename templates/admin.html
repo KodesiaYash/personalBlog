@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Portal</title>
+    <script>
+        async function createCategory(event) {
+            event.preventDefault();
+            const title = document.getElementById("categoryTitle").value;
+            const description = document.getElementById("categoryDescription").value;
+
+            const response = await fetch("/createCategory", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ title, description })
+            });
+
+            const result = await response.json();
+            alert(JSON.stringify(result));
+        }
+
+        async function createBlog(event) {
+            event.preventDefault();
+            const categoryId = document.getElementById("blogCategoryId").value;
+            const title = document.getElementById("blogTitle").value;
+            const content = document.getElementById("blogContent").value;
+
+            const response = await fetch("/createBlog", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ categoryId, title, content })
+            });
+
+            const result = await response.json();
+            alert(JSON.stringify(result));
+        }
+    </script>
+</head>
+<body>
+    <h1>Admin Portal</h1>
+    <form onsubmit="createCategory(event)">
+        <h2>Create Category</h2>
+        <label for="categoryTitle">Title:</label>
+        <input type="text" id="categoryTitle" name="title"><br><br>
+        <label for="categoryDescription">Description:</label>
+        <input type="text" id="categoryDescription" name="description"><br><br>
+        <input type="submit" value="Create Category">
+    </form>
+    <form onsubmit="createBlog(event)">
+        <h2>Create Blog</h2>
+        <label for="blogCategoryId">Category ID:</label>
+        <input type="text" id="blogCategoryId" name="categoryId"><br><br>
+        <label for="blogTitle">Title:</label>
+        <input type="text" id="blogTitle" name="title"><br><br>
+        <label for="blogContent">Content:</label>
+        <textarea id="blogContent" name="content"></textarea><br><br>
+        <input type="submit" value="Create Blog">
+    </form>
+</body>
+</html>
